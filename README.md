@@ -1,23 +1,16 @@
-## Foundry
+## Trustless Bridge
+Transferring tokens across Layer 2 (L2) networks, particularly between fundamentally different L2 groups like optimistic rollups and ZK-rollups, often requires cross-chain messaging protocols such as Axelar or Layer 0. However, these protocols come with specific trust assumptions (e.g., reliance on oracles), which, if compromised, can lead to significant vulnerabilities or losses during cross-chain transactions.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Scroll introduces a groundbreaking feature, L1SLOAD, which enables direct reading of data from Layer 1 (L1). This innovation eliminates the need for cross-chain messaging protocols when bridging assets from other L2s to Scroll, paving the way for a truly trustless bridge.
 
-Foundry consists of:
+The Trustless Bridge Project demonstrates how assets can be securely and trustlessly transferred from Optimism to Scroll using the L1SLOAD precompile. This implementation highlights a new era of seamless, decentralized, and trustless interoperability between L2 ecosystems.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
+https://trustless-bridge-frontend.vercel.app/bridge
 
 ### Build
 
 ```shell
+$ npm install
 $ forge build
 ```
 
@@ -25,42 +18,4 @@ $ forge build
 
 ```shell
 $ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
 ```

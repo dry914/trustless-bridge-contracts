@@ -6,4 +6,6 @@ struct Deposit {
     address receiver;
     uint256 amount;
     uint256 chainId;
+    uint256 fee;
+    address sender;
 }

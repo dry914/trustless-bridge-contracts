@@ -6,6 +6,7 @@
     "src/**/*.sol"
   ],
   "dependencies": {
+    "@pythnetwork/entropy-sdk-solidity": "^1.5.0",
     "solidity-rlp": "^2.0.7"
   },
   "devDependencies": {
