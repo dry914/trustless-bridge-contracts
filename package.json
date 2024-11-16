@@ -1,0 +1,16 @@
+{
+  "name": "trustless-bridge",
+  "description": "trustless-bridge",
+  "version": "0.1.0",
+  "files": [
+    "src/**/*.sol"
+  ],
+  "dependencies": {
+    "solidity-rlp": "^2.0.7"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.8.3",
+    "solhint": "^3.4.1"
+  },
+  "license": "MIT"
+}
