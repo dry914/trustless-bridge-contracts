@@ -9,6 +9,21 @@ contract DepositBridge {
     error WrongToken(address _underlyingToken);
     error ZeroAmount();
     error WrongDepositId(uint256 _depositId);
+    error WrongReceiver(address _receiver);
+
+    event Deposited(
+        uint256 indexed depositId
+    );
+    event Withdrawn(
+        address token,
+        address receiver,
+        uint256 amount,
+        uint256 chainId
+    );
+    event WhitelistChanged(
+        IERC20 token,
+        bool added
+    );
 
     address constant NATIVE_TOKEN = address(0x123);
     uint256 lastDepositId;
@@ -22,8 +37,9 @@ contract DepositBridge {
     }
 
     // TODO: add ownership
-    function setTokenToWhitelist(IERC20 _token) external /*onlyOwner*/ {
-        tokenWhitelist[_token] = true;
+    function setTokenToWhitelist(IERC20 _token, bool _added) external /** onlyOwner */ {
+        tokenWhitelist[_token] = _added;
+        emit WhitelistChanged(_token, _added);
     }
 
     function depositEth(
@@ -72,7 +88,23 @@ contract DepositBridge {
             _deposit.chainId
         ));
 
+        emit Deposited(_lastDepositId);
         return _lastDepositId;
+    }
+
+    // TODO: refactor
+    function emergancyWithdraw(uint256 _depositId) external /** onlyOwner */ {
+        Deposit memory _deposit = deposits[_depositId];
+        if (_deposit.receiver != msg.sender) {
+            revert WrongReceiver(_deposit.receiver);
+        }
+
+        delete deposits[_depositId];
+        delete depositHashes[_depositId];
+
+        (bool success, ) = msg.sender.call{value: _deposit.amount}("");
+        emit Withdrawn(_deposit.token, _deposit.receiver, _deposit.amount, _deposit.chainId);
+        require(success, "ETH transfer failed");
     }
 
     function getDeposit(uint256 _depositId) external view returns(Deposit memory) {

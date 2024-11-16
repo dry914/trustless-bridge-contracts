@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import {TbUsdt} from "../src/tokens/TbUsdt.sol";
-import {Test, console} from "forge-std/Test.sol";
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {StdCheats} from "forge-std/StdCheats.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import { Test } from "forge-std/Test.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-import {DepositBridge} from "../src/DepositBridge.sol";
+import { TbUsdt } from "../src/tokens/TbUsdt.sol";
+import { DepositBridge } from "../src/DepositBridge.sol";
 
 
 contract UnderlyingUsdt is ERC20{
@@ -38,13 +38,13 @@ contract TokenERC20Test is StdCheats, Test {
 
         // TODO: fix decimals for USDT to 6
         underlyingUsdt = new UnderlyingUsdt("Tether", "USDT");
-        tbUsdt = new TbUsdt("tbUsdt", "tbUSDT");
+        tbUsdt = new TbUsdt();
 
         depositBridge = new DepositBridge();
     }
 
     function testInvariantMetadata() public {
-        assertEq(tbUsdt.name(), "tbUsdt");
+        assertEq(tbUsdt.name(), "Tether");
         assertEq(tbUsdt.symbol(), "tbUSDT");
         assertEq(tbUsdt.decimals(), 18);
     }
