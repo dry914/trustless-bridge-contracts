@@ -7,6 +7,10 @@ The Trustless Bridge Project demonstrates how assets can be securely and trustle
 
 https://trustless-bridge-frontend.vercel.app/bridge
 
+### Demo video
+
+https://youtu.be/07ohcE1I7_Y
+
 ### Build
 
 ```shell
